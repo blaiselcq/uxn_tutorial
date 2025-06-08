@@ -1,0 +1,14 @@
+( hello.tal )
+
+|10 @console $8 &write
+
+( macro: print a character to standard output )
+%EMIT { .console/write DEO } ( character -- )
+
+
+|0100 LIT "h EMIT
+      LIT "e EMIT
+      LIT "l EMIT
+      LIT "l EMIT
+      LIT "o EMIT
+      LIT 0a EMIT

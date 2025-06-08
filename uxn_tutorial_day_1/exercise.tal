@@ -1,0 +1,27 @@
+( exercise.tal )
+
+( devices )
+|18 @cw
+
+( macro: print a character to standard output )
+%EMIT { .cw DEO } ( character -- )
+( macro: print a digit to standard output )
+%PRINT-DIGIT { LIT 30 ADD EMIT } ( number -- )
+
+|0100
+      LIT 0a
+      LIT "o 
+      LIT "l
+      LIT "l
+      LIT "e
+      LIT "h
+      EMIT EMIT EMIT EMIT EMIT EMIT
+
+      LIT 00 PRINT-DIGIT
+      LIT 01 PRINT-DIGIT
+      LIT 02 PRINT-DIGIT
+
+      LIT 05
+      LIT 04
+      LIT 03
+      PRINT-DIGIT PRINT-DIGIT PRINT-DIGIT
