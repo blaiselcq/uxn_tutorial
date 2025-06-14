@@ -1,0 +1,60 @@
+
+|00 @System
+	&vector $2 &pad $6 &r $2 &g $2 &b $2
+|20 @Screen
+	&vector $2 &width $2 &height $2 &auto $1 &pad $1 &x $2 &y $2 &addr $2 &pixel $1 &sprite $1
+
+%SZX { .Screen/width  DEI2 }
+%SZY { .Screen/height DEI2 }
+
+
+|0100
+
+	( set colors )
+	#2ce9 .System/r DEO2
+	#01c0 .System/g DEO2
+	#2ce5 .System/b DEO2
+
+	( draw corners )
+	;sprites/corner .Screen/addr DEO2
+
+	#0000 .Screen/x DEO2
+	#0000 .Screen/y DEO2
+	#91 .Screen/sprite DEO
+	SZX #0008 SUB2 .Screen/x DEO2
+	#81 .Screen/sprite DEO
+	SZY #0008 SUB2 .Screen/y DEO2
+	#a1 .Screen/sprite DEO
+	#0000 .Screen/x DEO2
+	#b1 .Screen/sprite DEO
+
+	( draw border, only one element for now: no loop )
+	;sprites/side .Screen/addr DEO2
+	SZY #01 SFT2 .Screen/y DEO2
+	#91 .Screen/sprite DEO
+	SZX #0008 SUB2 .Screen/x DEO2
+	#81 .Screen/sprite DEO
+	;sprites/top .Screen/addr DEO2
+	#0000 .Screen/y DEO2
+	SZX #01 SFT2 .Screen/x DEO2
+	#81 .Screen/sprite DEO
+	SZY #0008 SUB2 .Screen/y DEO2
+	#a1 .Screen/sprite DEO
+
+
+	( draw center )
+	;sprites/center .Screen/addr DEO2
+	SZY #01 SFT2 .Screen/y DEO2
+	#80 .Screen/sprite DEO
+
+BRK
+
+@sprites
+&top
+[ ff  c3  c3  81  00  00  00  00  00  3c  3c  7e  00  00  00  00 ]
+&side
+[ 0f  07  01  01  01  01  07  0f  00  08  0e  0e  0e  0e  08  00 ]
+&corner
+[ ff  f3  e1  e1  73  3f  1f  0f  00  0c  1e  1e  0c  00  00  00 ]
+&center
+[ 18  18  3c  ff  ff  3c  18  18  ff  ff  ff  ff  ff  ff  ff  ff ]
